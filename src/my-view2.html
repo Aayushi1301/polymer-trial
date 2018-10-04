@@ -1,29 +1,48 @@
-
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="shared-styles.html">
-
-<link rel="import" href="../bower_components/px-forms-design/px-forms-design.html">
 <dom-module id="my-view2">
   <template>
-    <label for="input1" class="style-scope px-forms-design-demo">Name</label>
-    <input class="text-input style-scope px-forms-design-demo" id="input1" placeholder="Type something..." type="text">
+    <form id="frm1">
+      Name:<input type="text" id="name"><br><br>
+      Phone: <input type="text" id="phone"><br><br>
+      Email: <input type="text" id="email"><br><br>
+      Country: <input type="text" id="country"><br><br>
+    </form>
     <br>
-    <label for="input2" class="style-scope px-forms-design-demo">Phone Number</label>
-    <input class="text-input style-scope px-forms-design-demo" id="input2" placeholder="Type something..." type="text">
-    <br>
-    <label for="input3" class="style-scope px-forms-design-demo">Email</label>
-    <input class="text-input style-scope px-forms-design-demo" id="input3" placeholder="Type something..." type="text">
-    <br>
-    <label for="input4" class="style-scope px-forms-design-demo">Country</label>
-    <input class="text-input style-scope px-forms-design-demo" id="input4" placeholder="Type something..." type="text">
-    <br>
-    <button class="btn" type="submit">Save</button>
+    <button on-click="saveData">Save</button>
+    <button class="btn" type="submit" on-click="handleClick">Cancel</button>
 
   </template>
-
   <script>
     Polymer({
       is: 'my-view2',
+      properties:{
+        page: {
+          type: String,
+          notify:true
+          },
+          arr:{
+          value:{},
+          notify:true
+          },
+         },
+         handleClick: function(e) {
+          console.log("button clicked");
+          this.page="view1";
+         },
+         saveData: function(e) {
+          console.log("Data saved");
+
+
+          this.arr["name"]=this.$.name.value;
+          this.arr["phone"]=this.$.phone.value;
+          this.arr["email"]=this.$.email.value;
+          this.arr["country"]=this.$.country.value;
+
+         //console.log(this.arr);
+         this.fire('save', this.arr);
+          this.page="view1";
+        },
     });
   </script>
 </dom-module>

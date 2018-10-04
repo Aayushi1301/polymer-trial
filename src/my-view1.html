@@ -1,7 +1,11 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="shared-styles.html">
 <link rel="import" href="../bower_components/px-data-table/px-data-table.html">
-<link rel="import" href="../bower_components/px-button-group-design/px-button-group-design.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="my-view123.html">
+<link rel="import" href="my-view2.html">
 <dom-module id="my-view1">
   <template>
     <style include="shared-styles">
@@ -12,51 +16,41 @@
       }
     </style>
 
-
-    <px-data-table
-            table-data='[{"name":"Valentine","phone":"1234567898","email":"valentinemeyer@scentric.com","country":"India"},{"name":"Silva","phone":"8976543214","email":"silvaalexander@gmail.com","country":"India"},{"name":"Hopkins","phone":"Wong","email":"hopkinswong@hotmail.com","country":"Japan"},{"name":"Joe","phone":"9876543215","email":"joejoe@yahoo.com","country":"China"},{"name":"Jane","phone":"9876785436","email":"jane@scentric.com","country":"India"},{"name":"Janice","phone":"9876789436","email":"janice@scentric.com","country":"India"}]'
-            language="en">
-      <!--<px-data-table-column-->
-      <!--name='name'-->
-      <!--sortable-->
-      <!--editable-->
-      <!--filterable>-->
-      <!--</px-data-table-column>-->
-      <!--<px-data-table-column-->
-      <!--name='phone'-->
-      <!--sortable-->
-      <!--editable-->
-      <!--filterable>-->
-      <!--</px-data-table-column>-->
-      <!--<px-data-table-column-->
-      <!--name='email'-->
-      <!--sortable-->
-      <!--editable-->
-      <!--filterable>-->
-      <!--</px-data-table-column>-->
-      <!--<px-data-table-column-->
-      <!--name='country'-->
-      <!--sortable-->
-      <!--editable-->
-      <!--filterable>-->
-      <!--</px-data-table-column>-->
-
-    </px-data-table>
-
-
-
-
-    <!-- Single Select -->
-
-
-    <button class="btn">New</button>
-
-
+    <iron-pages
+            selected="[[page]]"
+            attr-for-selected="name"
+            >
+      <my-view123 name="view1" page="{{page}}" table-data="{{tableData}}"></my-view123>
+      <my-view2 name="view2" page="{{page}}" on-save="add"></my-view2>
+    </iron-pages>
   </template>
 
   <script>
     Polymer({
       is: 'my-view1',
+
+      properties:{
+        page: {
+          type: String,
+          value : "view1"
+          },
+          tableData:{
+          value:[],
+          notify:true
+          }
+         },
+         handleClick: function(e) {
+          console.log("button clicked");
+          this.page="view2";
+        },
+        ready:function(){
+        this.tableData = [{name:"Chris",phone:"1234567898",email:"valentinemeyer@scentric.com",country:"India"},{name:"Silva",  phone:"8976543214",email:"silvaalexander@gmail.com",country:"India"}];
+        },
+        add:function(e){
+        console.log(this.tableData);
+        this.push('tableData',e.detail);
+        console.log(this.tableData);
+      }
     });
   </script>
 </dom-module>

@@ -1,0 +1,36 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="shared-styles.html">
+<link rel="import" href="../bower_components/px-data-table/px-data-table.html">
+<link rel="import" href="../bower_components/px-button-group-design/px-button-group-design.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+<dom-module id="empTable">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+    </style>
+
+
+    <px-data-table
+            table-data='[{"name":"Valentine","phone":"1234567898","email":"valentinemeyer@scentric.com","country":"India"},{"name":"Silva","phone":"8976543214","email":"silvaalexander@gmail.com","country":"India"},{"name":"Hopkins","phone":"Wong","email":"hopkinswong@hotmail.com","country":"Japan"},{"name":"Joe","phone":"9876543215","email":"joejoe@yahoo.com","country":"China"},{"name":"Jane","phone":"9876785436","email":"jane@scentric.com","country":"India"},{"name":"Janice","phone":"9876789436","email":"janice@scentric.com","country":"India"}]'
+            language="en">
+
+    </px-data-table>
+
+    <button class="btn" on-click="handleClick">New</button>
+
+
+
+  </template>
+
+  <script>
+    Polymer({
+      is: 'empTable',
+    });
+  </script>
+</dom-module>
